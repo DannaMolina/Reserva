@@ -23,10 +23,10 @@ public class Reserva {
         String url = "jdbc:mysql://localhost:3308/condominio";
 
 
-        String dia;
-        String horaInicio;
-        String horaFin;
-        int idEventos = 0;
+        String Dia;
+        String HoraInicio;
+        String HoraFin;
+        int IdEventos = 0;
         
         String[] opciones = {"Realizar Reserva", "Consultar Reserva", "Actualizar Reserva", "Eliminar Reserva"};
 
@@ -38,18 +38,18 @@ public class Reserva {
 
         JOptionPane.showMessageDialog(null, "A continuación se le pedirán los datos para realizar la reserva");
 
-                    dia = JOptionPane.showInputDialog("Ingrese el día de la reserva");
-                    horaInicio = JOptionPane.showInputDialog("Ingrese la hora de inicio de su reserva");
-                    horaFin = JOptionPane.showInputDialog("Ingrese la hora de finalización de su reserva");
-                    idEventos = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el id del evento"));
+                    Dia = JOptionPane.showInputDialog("Ingrese el día de la reserva ejemplo(2024-12-31)");
+                    HoraInicio = JOptionPane.showInputDialog("Ingrese la hora de inicio de su reserva ejemplo(12:60:60)");
+                    HoraFin = JOptionPane.showInputDialog("Ingrese la hora de finalización de su reserva ejemplo(2024-12-31 12:60:60)");
+                    IdEventos = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el id del evento"));
         
        
-            String sqlreserva = "INSERT INTO reservas (reservas_dia, reservas_hora_inicio, reservas_hora_fin, eventos_eventos_id) VALUES (?, ?, ?, ?)";
+            String sqlreserva = "INSERT INTO reservas (reservas_Dia, reservas_hora_inicio, reservas_hora_fin, eventos_eventos_id) VALUES (?, ?, ?, ?)";
                 try (PreparedStatement statementReserva = conexion.prepareStatement(sqlreserva)) {
-                        statementReserva.setString(1, dia);
-                        statementReserva.setString(2, horaInicio);
-                        statementReserva.setString(3, horaFin);
-                        statementReserva.setInt(4,idEventos);
+                        statementReserva.setString(1, Dia);
+                        statementReserva.setString(2, HoraInicio);
+                        statementReserva.setString(3, HoraFin);
+                        statementReserva.setInt(4,IdEventos);
                     
                         
 
@@ -106,11 +106,11 @@ public class Reserva {
     }
 }
   // Método para actualizar
-    public static void ActualizarReserva(Connection connection, int idReserva, String dia, String horaInicio) throws SQLException {
+    public static void ActualizarReserva(Connection connection, int idReserva, String Dia, String HoraInicio) throws SQLException {
         String sqlUpdate = "UPDATE reservas SET reservas_dia = ?, reservas_hora_inicio = ? WHERE reservas_id = ?";
         PreparedStatement statementUpdate = connection.prepareStatement(sqlUpdate);
-        statementUpdate.setString(1, dia);
-        statementUpdate.setString(2, horaInicio);
+        statementUpdate.setString(1, Dia);
+        statementUpdate.setString(2, HoraInicio);
         statementUpdate.setInt(3, idReserva);
         statementUpdate.executeUpdate();
     }
